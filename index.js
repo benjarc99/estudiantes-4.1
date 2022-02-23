@@ -46,16 +46,29 @@ const myDeformedArray = [
   },
 ];
 
+const filterStudents = (array) => {
+  let nombre;
+  let imgStudent;
+  array.forEach((el, index) => {
+    if (el.firstName || el.icon) {
+      nombre = el.firstName;
+      delete array[index].firstName;
+      array[index].name = nombre;
+
+      imgStudent = el.icon;
+      delete array[index].icon;
+      array[index].avatar = imgStudent;
+    }
+  });
+};
+filterStudents(myDeformedArray);
+
 const myStudents = myArray.concat(myDeformedArray);
 
 const printCards = (data) => {
   data.forEach((el) => {
-    if (el.avatar === undefined) {
-      $template.querySelector(".img-card").setAttribute("src", `${el.icon}`);
-    } else {
-      $template.querySelector(".img-card").setAttribute("src", `${el.avatar}`);
-    }
-    $template.querySelector("h4").textContent = el.name || el.firstName;
+    $template.querySelector(".img-card").setAttribute("src", `${el.avatar}`);
+    $template.querySelector("h4").textContent = el.name;
     $template.querySelector("div.text-card").textContent = el.title;
     $template.querySelector("button").textContent = el.buttontext;
 
