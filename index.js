@@ -46,24 +46,35 @@ const myDeformedArray = [
   },
 ];
 
-const filterStudents = (array) => {
-  let nombre;
-  let imgStudent;
-  array.forEach((el, index) => {
-    if (el.firstName || el.icon) {
-      nombre = el.firstName;
-      delete array[index].firstName;
-      array[index].name = nombre;
+// const filterStudents = (array) => {
+//   let nombre;
+//   let imgStudent;
+//   array.forEach((el, index) => {
+//     if (el.firstName || el.icon) {
+//       nombre = el.firstName;
+//       delete array[index].firstName;
+//       array[index].name = nombre;
 
-      imgStudent = el.icon;
-      delete array[index].icon;
-      array[index].avatar = imgStudent;
-    }
-  });
-};
-filterStudents(myDeformedArray);
+//       imgStudent = el.icon;
+//       delete array[index].icon;
+//       array[index].avatar = imgStudent;
+//     }
+//   });
+// };
+// filterStudents(myDeformedArray);
 
-const myStudents = myArray.concat(myDeformedArray);
+// const myStudents = myArray.concat(myDeformedArray);
+
+const filteredArray = myDeformedArray.map((student) => {
+  return {
+    name: student.firstName,
+    title: student.title,
+    buttontext: student.buttontext,
+    avatar: student.icon,
+  };
+});
+
+const myStudents = myArray.concat(filteredArray);
 
 const printCards = (data) => {
   data.forEach((el) => {
